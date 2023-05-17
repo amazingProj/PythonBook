@@ -1,4 +1,4 @@
-POSTS_INDEX_NAME = "users_index"
+POSTS_INDEX_NAME = "your_index_name"
 
 POSTS_INDEX_SETTINGS = {
     "number_of_shards": 3,
@@ -13,12 +13,17 @@ POSTS_INDEX_MAPPINGS = {
         "first_name": {"type": "text"},
         "last_name": {"type": "text"},
         "phone_number": {"type": "keyword"},
-        "location": {"type": "object"},
+        "location": {
+            "properties": {
+                "x": {"type": "float"},
+                "y": {"type": "float"}
+            }
+        },
         "gender": {"type": "keyword"},
         "relationship_status": {"type": "keyword"},
         "interested_in": {"type": "keyword"},
         "hobbies": {"type": "text"},
         "friends": {"type": "keyword"},
-        "published_at": {"type": "date"}
+        "published_at": {"type": "text"}
     }
 }
