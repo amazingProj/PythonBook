@@ -3,7 +3,7 @@ from controller.search import \
     (
         login,
         user as search_user,
-        user_friends as friends
+        user_friends as friends,
     )
 from controller.migration import *
 from view.response import *
@@ -19,13 +19,6 @@ async def user_friends(user_id: T):
     return message
 
 
-@router.get("/")
-async def filter_users(hobbies: List[str] = Query(None),
-                       location_x: float = Query(None),
-                       location_y: float = Query(None)):
-    pass
-
-
 @router.get("/{user_id}")
 async def user_by_id(user_id):
     return search_user(user_id)
@@ -34,8 +27,11 @@ async def user_by_id(user_id):
 @router.post("/{user_id}/friends")
 async def add_friends(user_id: T, body_friends: List[T]):
     friends_user = friends(user_id)
+    friends_user = friends_user["hits"]["hits"]
+    print(friends_user)
     friends_to_add = [friend_id for friend_id in body_friends if not friends_user.__contains__(friend_id)]
-    return friends_user | friends_to_add
+    print(friends_to_add)
+    return update_user_friends(user_id, friends_user + friends_to_add)
 
 
 @router.post("/register")

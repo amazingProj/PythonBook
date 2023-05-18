@@ -3,6 +3,8 @@ from db.es import es, create_index
 from db.es_conf import (POSTS_INDEX_NAME)
 from model.user_model import T
 from db.query import delete_all_query
+from controller.search import user as user_search
+from typing import List
 
 create_index()
 
@@ -26,3 +28,12 @@ def delete_users():
 def update_user(user_id: T, user: User):
     response = es.update(index=POSTS_INDEX_NAME, id=user_id, body={"doc": user.dict(exclude={"_id", "friends"})})
     return response
+
+
+def update_user_friends(user_id: T, friends: List[T]):
+    response = user_search(user_id)
+    print(response)
+    user: User = response["hits"]["hits"]
+    print(user)
+    # user["friends"] = friends
+    # return es.update(index=POSTS_INDEX_NAME, id=user_id, body={"doc": user.dict()})
