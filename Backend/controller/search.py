@@ -1,5 +1,5 @@
 from db.query import \
-    (login_query, user_exclude_friend)
+    (login_query, user_exclude_friend, user_friends_query)
 from db.es_conf import (POSTS_INDEX_NAME)
 from db.es import es
 from model.user_model import T
@@ -16,3 +16,10 @@ def login(email: str, password: str):
 def user(user_id: T):
     return search(user_exclude_friend(user_id))
 
+
+def user_friends(user_id: T):
+    return search(user_friends_query(user_id))
+
+
+def users():
+    pass

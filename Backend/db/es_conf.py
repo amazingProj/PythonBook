@@ -1,4 +1,4 @@
-POSTS_INDEX_NAME = "your_index_name"
+POSTS_INDEX_NAME = "user"
 
 POSTS_INDEX_SETTINGS = {
     "number_of_shards": 3,

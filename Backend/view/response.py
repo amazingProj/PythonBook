@@ -20,5 +20,5 @@ def response_delete(is_succeeded: bool, user_id: T):
     if user_id is None:
         return message
 
-    return f'{message} {user_id}'
+    return response("%(message)s%(user_id)" % locals())
 
