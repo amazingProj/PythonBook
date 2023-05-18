@@ -7,7 +7,7 @@ from controller.search import \
     )
 from controller.migration import *
 from view.response import *
-from typing import List, Set
+from typing import List
 
 
 router = APIRouter()
