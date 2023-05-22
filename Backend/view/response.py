@@ -1,4 +1,4 @@
-from util.constant import (NO_RESULT)
+from constant import (NO_RESULT)
 from util.string import response
 from model.user_model import T
 
