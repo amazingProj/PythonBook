@@ -15,7 +15,7 @@ def create_user(user: User):
     response = es.index(index=POSTS_INDEX_NAME, body=user.dict())
     # TODO set status code to be the relevant Http status code - Use HTTP_STATUS library
     new_user_id, status_code = extract_data_from_es_response(response)
-    return new_user_id
+    return new_user_id, status_code
 
 
 def update_user(user_id: T, user: User):
