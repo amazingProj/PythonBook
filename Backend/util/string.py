@@ -1,9 +1,11 @@
+from fastapi import HTTPException
 from typing import Any, Set
 
 
 def option(candidate: str, options: Set[str]) -> str:
     if candidate.lower() not in options:
-        raise ValueError(f'Invalid. Must be one of: {",".join(options)}')
+        message = f'Invalid. Must be one of: {",".join(options)}'
+        raise HTTPException(status_code=400, detail=message)
     return candidate
 
 

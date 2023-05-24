@@ -17,7 +17,7 @@ class User(BaseModel):
     relationship_status: str
     interested_in: str
     hobbies: List[str]
-    friends: List[T]
+    friends: List[T] = Field(default=[])
     published_at: datetime = Field(default_factory=datetime.utcnow)
 
     @validator('gender', 'interested_in')
