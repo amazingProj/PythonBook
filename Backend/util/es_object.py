@@ -7,6 +7,6 @@ def extract_first_hit(es_object):
 
 
 def extract_data_from_es_response(es_response):
-    status_code = es_response.meta.status
     new_user_id = es_response.body['_id']
+    status_code = es_response.meta.status
     return new_user_id, status_code

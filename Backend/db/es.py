@@ -5,7 +5,7 @@ from db.es_conf import (
     POSTS_INDEX_MAPPINGS
 )
 
-es = Elasticsearch([{"host": "localhost", "port": 9200, "scheme": "http"}])
+es = Elasticsearch([{"host": "172.17.0.0", "port": 9200, "scheme": "http"}])
 
 
 def create_index():

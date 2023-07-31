@@ -1,29 +1,5 @@
 from fastapi import HTTPException, status
-from typing import Any, Set
-
 from constant import MAXIMUM_LENGTH_ELASTIC_SEARCH_ID, ERROR_MAXIMUM_LENGTH_MESSAGE
-
-
-def option(candidate: str, options: Set[str]) -> str:
-    if candidate.lower() not in options:
-        message = f'Invalid gender for fields gender or interested_in. Must be one of: {",".join(options)}. '
-        raise HTTPException(status_code=400, detail=message)
-    return candidate
-
-
-def is_str(candidate: Any) -> bool:
-    return isinstance(candidate, str)
-
-
-def str_check(candidate: Any) -> str:
-    if is_str(candidate):
-        return candidate
-    raise ValueError('Invalid gender. Must be a string.')
-
-
-def response(message: str):
-    print(message)
-    return {"message": message}
 
 
 def check_valid_user_id(user_id: str):
@@ -35,4 +11,10 @@ def check_valid_user_id(user_id: str):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Not a valid empty user id")
     if user_id == "null":
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Not a valid user id {user_id}")
+    return
+
+
+def check_hobbies_locations(hobbies, location_x):
+    if hobbies is None and location_x is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="must alias hobbies or locations")
     return

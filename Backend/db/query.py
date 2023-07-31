@@ -12,6 +12,7 @@ def login_query(email: str, password: str):
             }
         }
     }
+
     return query
 
 
@@ -25,6 +26,7 @@ def user_minimal_details(user_id: T):
         "_source": ["gender", "relationship_status", "interested_in", "hobbies", "email", "first_name", "last_name",
                     "phone_number", "location"]
     }
+
     return query
 
 
@@ -36,6 +38,7 @@ def user_full_details(user_id: T):
             }
         }
     }
+
     return query
 
 
@@ -60,6 +63,7 @@ def user_friends_query(user_id: T):
             }
         }
     }
+
     return query
 
 
@@ -112,11 +116,10 @@ def users_hobbies_query(hobbies):
     query = {
         "query": {
             "bool": {
-                "filter": {
-                    "terms": {
-                        "hobbies": hobbies
-                    }
-                }
+                "must":
+                    [
+                        {"match": {"hobbies": hobbies[0]}}
+                    ]
             }
         },
         "_source": ["gender", "relationship_status", "interested_in", "hobbies", "email", "first_name", "last_name",
@@ -158,6 +161,41 @@ def all_users_query():
         },
         "_source": ["gender", "relationship_status", "interested_in", "hobbies", "email", "first_name", "last_name",
                     "phone_number", "location"]
+    }
+
+    return query
+
+
+def users_by_ids_query(users_ids):
+    query = {
+        "query": {
+            "bool": {
+                "filter": {
+                    "terms": {
+                        "_id": users_ids
+                    }
+                }
+            }
+        },
+        "_source": ["gender", "relationship_status", "interested_in", "hobbies", "email", "first_name", "last_name",
+                    "phone_number", "location"]
+    }
+
+    return query
+
+
+def users_friends_query(users_ids):
+    query = {
+        "query": {
+            "bool": {
+                "filter": {
+                    "terms": {
+                        "_id": users_ids
+                    }
+                }
+            }
+        },
+        "_source": ["friends"]
     }
 
     return query

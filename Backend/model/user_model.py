@@ -26,6 +26,6 @@ class User(BaseModel):
         return option(gender, {'male', 'female'})
 
     @validator('relationship_status')
-    def validate_relationship_status(cls, interested_in: str) -> str:
-        str_check(interested_in)
-        return option(interested_in, {'single', 'in_a_relationship'})
+    def validate_relationship_status(cls, relationship_status: str) -> str:
+        str_check(relationship_status)
+        return option(relationship_status, {'single', 'in_a_relationship'})
